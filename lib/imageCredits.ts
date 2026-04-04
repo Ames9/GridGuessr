@@ -40,10 +40,7 @@ export const IMAGE_CREDITS: Record<number, ImageCredit> = {
     text: "Quintin Soloviev, CC BY 4.0 <https://creativecommons.org/licenses/by/4.0>, via Wikimedia Commons",
     link: "https://upload.wikimedia.org/wikipedia/commons/0/04/Highmark_Stadium%2C_autumn_2022.jpg"
   },
-  9: {
-    text: "Cards84664, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
-    link: "https://commons.wikimedia.org/wiki/File:FirstEnergy_Stadium_50_yardline_panorama.png"
-  },
+
   17: {
     text: "Quintin Soloviev, CC BY 4.0 <https://creativecommons.org/licenses/by/4.0>, via Wikimedia Commons",
     link: "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Nissan_Stadium_(Tennessee_Titans).jpg"
@@ -52,10 +49,7 @@ export const IMAGE_CREDITS: Record<number, ImageCredit> = {
     text: "Mrgoggins90, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
     link: " https://upload.wikimedia.org/wikipedia/commons/c/c0/M%26T_Bank_Stadium.jpghttps://en.wikipedia.org/wiki/M%26T_Bank_Stadium#/media/File:M&T_Bank_Stadium_in_Baltimore.jpg"
   },
-  2: {
-    text: "PCN02WPS, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
-    link: "https://commons.wikimedia.org/wiki/File:Lumen_Field_aerial_view.jpg"
-  },
+
   28: {
     text: "JJonahJackalope, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
     link: "https://commons.wikimedia.org/wiki/File:Lincoln_Financial_Field,_Philadelphia,_2024.jpg"
@@ -66,7 +60,7 @@ export const IMAGE_CREDITS: Record<number, ImageCredit> = {
     link: "https://commons.wikimedia.org/wiki/File:Nrg_stadium.jpg"
   },
   2: {
-    text: ""Smart Destinations", GoSeattleCard.com, and Go Seattle Card Blog, CC BY-SA 2.0, via Wikimedia Commons",
+    text: `"Smart Destinations", GoSeattleCard.com, and Go Seattle Card Blog, CC BY-SA 2.0, via Wikimedia Commons`,
     link: "https://commons.wikimedia.org/wiki/File:Qwest_Field_North.jpg"
   },
   5: {
