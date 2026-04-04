@@ -66,7 +66,7 @@ export default function ResultScreen({ results, totalScore, onRestart }: ResultS
         className="w-full py-4 rounded-xl bg-slate-800 text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-slate-300 hover:bg-slate-900 transition-colors"
       >
         <RotateCcw size={18} />
-        もう一度プレイ
+        Play Again
       </motion.button>
     </motion.div>
   );

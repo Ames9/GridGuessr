@@ -24,7 +24,7 @@ export default function MenuScreen({ onStart }: MenuScreenProps) {
       </div>
 
       <div className="flex flex-col items-center gap-4 w-full max-w-sm mt-4">
-        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1 font-semibold">モードを選択</p>
+        <p className="text-slate-400 text-xs uppercase tracking-widest mb-1 font-semibold">Select Mode</p>
 
         {(["NFL", "NCAA", "ALL"] as GameMode[]).map((mode) => (
           <motion.button
@@ -44,7 +44,7 @@ export default function MenuScreen({ onStart }: MenuScreenProps) {
           >
             <span className="relative z-10 flex items-center justify-between">
               <span>
-                {mode === "NFL" ? "🏈 NFLスタジアム" : mode === "NCAA" ? "🎓 カレッジフットボール" : "🌎 ミックス (全部)"}
+                {mode === "NFL" ? "🏈 NFL Stadiums" : mode === "NCAA" ? "🎓 College Football Stadiums" : "🌎 Mixed"}
               </span>
               <ChevronRight size={18} className="opacity-80 group-hover:translate-x-1 transition-transform" />
             </span>
@@ -54,8 +54,8 @@ export default function MenuScreen({ onStart }: MenuScreenProps) {
       </div>
 
       <div className="mt-6 text-center text-slate-400 text-sm max-w-xs leading-relaxed font-medium">
-        3問ランダム出題。地図上をクリックしてスタジアムの位置を当ててください。
-        距離が近いほど高スコア！(最高 5000点/問)
+        3 random locations. Click the map to guess the stadium's location.
+        The closer you are, the higher your score! (Max 5,000 pts/round)
       </div>
     </motion.div>
   );

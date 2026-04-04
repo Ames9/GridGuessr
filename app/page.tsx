@@ -47,7 +47,7 @@ export default function Home() {
               onClick={restart}
               className="text-slate-400 hover:text-slate-600 text-sm font-bold transition-colors flex items-center gap-1"
             >
-              ✕ メニュー
+              ✕ Menu
             </button>
           )}
         </div>
@@ -106,7 +106,7 @@ export default function Home() {
                     "
                   >
                     <MapPin size={16} />
-                    ここに確定！
+                    Confirm!
                   </button>
                 </motion.div>
               )}

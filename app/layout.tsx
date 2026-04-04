@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "GridGuesser — NFL & College Football Stadium Quiz",
   description:
-    "NFLおよびカレッジフットボールのスタジアムの位置を当てるマップ推測ゲーム。アメリカの白地図上にピンを刺して正解座標との距離でスコアを競え！",
+    "A map guessing game for NFL and College Football stadiums. Drop a pin on the US map and try to get as close as possible to the real location!",
 };
 
 export default function RootLayout({

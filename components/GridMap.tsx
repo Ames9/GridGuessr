@@ -142,7 +142,7 @@ export default function GridMap({ onPinPlace, currentPin, result, interactive }:
       {interactive && !currentPin && (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none">
           <p className="text-xs text-slate-500 bg-white/90 px-4 py-2 rounded-full shadow-sm font-semibold border border-slate-100">
-            🗺️ 地図をクリックしてピンを刺してください
+            🗺️ Click on the map to drop a pin
           </p>
         </div>
       )}
@@ -150,7 +150,7 @@ export default function GridMap({ onPinPlace, currentPin, result, interactive }:
       {interactive && currentPin && (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none">
           <p className="text-xs text-blue-600 bg-white/90 px-4 py-2 rounded-full shadow-sm font-semibold border border-blue-100">
-            📍 ピンを確定するか、別の場所をクリックして移動
+            📍 Confirm your pin or click elsewhere to move it
           </p>
         </div>
       )}

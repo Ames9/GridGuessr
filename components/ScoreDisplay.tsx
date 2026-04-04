@@ -58,7 +58,7 @@ export default function ScoreDisplay({ result, onNext, isLast }: ScoreDisplayPro
 
       <div className="flex justify-between items-center py-2">
         <div className="text-center flex-1">
-          <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">距離</p>
+          <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Distance</p>
           <CountUp
             target={result.distanceMiles}
             className="text-3xl font-black text-slate-800"
@@ -68,7 +68,7 @@ export default function ScoreDisplay({ result, onNext, isLast }: ScoreDisplayPro
         </div>
         <div className="h-12 w-px bg-slate-200" />
         <div className="text-center flex-1">
-          <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">獲得スコア</p>
+          <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Score</p>
           <CountUp
             target={result.score}
             className="text-3xl font-black text-blue-600"
@@ -87,11 +87,11 @@ export default function ScoreDisplay({ result, onNext, isLast }: ScoreDisplayPro
         {isLast ? (
           <>
             <Trophy size={18} className="text-yellow-400" />
-            結果を見る
+            View Results
           </>
         ) : (
           <>
-            次の問題へ
+            Next Round
             <ChevronRight size={18} />
           </>
         )}
