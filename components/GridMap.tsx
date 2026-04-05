@@ -74,7 +74,7 @@ export default function GridMap({ onPinPlace, currentPin, result, interactive }:
         ref={svgRef}
         onClick={handleSvgClick as (e: React.MouseEvent<SVGElement>) => void}
       >
-        <ZoomableGroup>
+        <ZoomableGroup maxZoom={32}>
           <Geographies geography={GEO_URL}>
             {({ geographies }: { geographies: object[] }) =>
               geographies.map((geo: { rsmKey?: string } & object) => (
