@@ -1,6 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import { geoCentroid, geoAlbersUsa, geoPath } from "d3-geo";
+
+// Same projection params as ComposableMap (800×600 viewBox, scale 1000)
+const stateProjection = geoAlbersUsa().scale(1000).translate([400, 300]);
+const statePathGen = geoPath(stateProjection);
 import {
   ComposableMap,
   Geographies,
@@ -18,9 +23,10 @@ interface GridMapProps {
   currentPin: LatLng | null;
   result: RoundResult | null;
   interactive: boolean;
+  showStateLabels?: boolean;
 }
 
-export default function GridMap({ onPinPlace, currentPin, result, interactive }: GridMapProps) {
+export default function GridMap({ onPinPlace, currentPin, result, interactive, showStateLabels = false }: GridMapProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   const handleSvgClick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -64,11 +70,11 @@ export default function GridMap({ onPinPlace, currentPin, result, interactive }:
   };
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white">
+    <div className="relative w-full rounded-2xl border border-slate-200 shadow-md bg-white">
       <ComposableMap
         projection="geoAlbersUsa"
         projectionConfig={{ scale: 1000 }}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", overflow: "visible" }}
         className="w-full aspect-[1.7/1]"
         // @ts-ignore — react-simple-maps passes ref down to SVG
         ref={svgRef}
@@ -77,31 +83,63 @@ export default function GridMap({ onPinPlace, currentPin, result, interactive }:
         <ZoomableGroup maxZoom={32}>
           <Geographies geography={GEO_URL}>
             {({ geographies }: { geographies: object[] }) =>
-              geographies.map((geo: { rsmKey?: string } & object) => (
-                <Geography
-                  key={(geo as { rsmKey: string }).rsmKey}
-                  geography={geo}
-                  style={{
-                    default: {
-                      fill: "#f3f4f6", // very light gray
-                      stroke: "#ffffff",
-                      strokeWidth: 1.2,
-                      outline: "none",
-                    },
-                    hover: {
-                      fill: interactive ? "#e2e8f0" : "#f3f4f6", // slightly darker on hover
-                      stroke: "#ffffff",
-                      strokeWidth: 1.2,
-                      outline: "none",
-                      cursor: interactive ? "crosshair" : "default",
-                    },
-                    pressed: {
-                      fill: "#cbd5e1",
-                      outline: "none",
-                    },
-                  }}
-                />
-              ))
+              geographies.map((geo: { rsmKey?: string; properties?: { name?: string } } & object) => {
+                const centroid = geoCentroid(geo as Parameters<typeof geoCentroid>[0]);
+                const projected = showStateLabels && geo.properties?.name
+                  ? stateProjection(centroid)
+                  : null;
+                // Scale font size proportional to the state's SVG area
+                const area = projected ? statePathGen.area(geo as Parameters<typeof statePathGen.area>[0]) : 0;
+                const fontSize = Math.max(3.5, Math.min(8, Math.sqrt(area) * 0.1));
+                // Wrap multi-word names onto 2 lines for small states
+                const stateName = geo.properties!.name as string;
+                const words = stateName.split(" ");
+                const multiLine = fontSize < 6 && words.length > 1;
+                return (
+                  <g key={(geo as { rsmKey: string }).rsmKey}>
+                    <Geography
+                      geography={geo}
+                      style={{
+                        default: {
+                          fill: "#f3f4f6",
+                          stroke: "#ffffff",
+                          strokeWidth: 1.2,
+                          outline: "none",
+                        },
+                        hover: {
+                          fill: interactive ? "#e2e8f0" : "#f3f4f6",
+                          stroke: "#ffffff",
+                          strokeWidth: 1.2,
+                          outline: "none",
+                          cursor: interactive ? "crosshair" : "default",
+                        },
+                        pressed: {
+                          fill: "#cbd5e1",
+                          outline: "none",
+                        },
+                      }}
+                    />
+                    {projected && (
+                      <text
+                        x={projected[0]}
+                        y={projected[1]}
+                        fontSize={fontSize}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fill="#64748b"
+                        style={{ pointerEvents: "none", userSelect: "none" }}
+                      >
+                        {multiLine ? (
+                          <>
+                            <tspan x={projected[0]} dy={`-${fontSize * 0.6}px`}>{words[0]}</tspan>
+                            <tspan x={projected[0]} dy={`${fontSize * 1.2}px`}>{words.slice(1).join(" ")}</tspan>
+                          </>
+                        ) : stateName}
+                      </text>
+                    )}
+                  </g>
+                );
+              })
             }
           </Geographies>
 

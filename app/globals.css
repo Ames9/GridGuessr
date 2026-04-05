@@ -34,3 +34,8 @@ body {
 svg {
   cursor: crosshair;
 }
+
+/* Allow state labels to overflow map bounds in Rookie mode */
+.rsm-zoomable-group {
+  clip-path: none !important;
+}

@@ -76,6 +76,7 @@ export default function Home() {
                 round={state.round}
                 totalRounds={state.totalRounds}
                 totalScore={totalScore}
+                showName={state.difficulty !== "all-pro" || isResult}
               />
 
               {/* Map */}
@@ -84,6 +85,7 @@ export default function Home() {
                 currentPin={state.currentPin}
                 result={currentResult}
                 interactive={isPlaying}
+                showStateLabels={state.difficulty === "rookie"}
               />
 
               {/* Confirm button or Result card */}
@@ -133,6 +135,7 @@ export default function Home() {
                     results={state.results}
                     totalScore={totalScore}
                     onRestart={restart}
+                    difficulty={state.difficulty}
                   />
             </motion.div>
           )}

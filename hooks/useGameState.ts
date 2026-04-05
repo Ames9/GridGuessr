@@ -6,6 +6,7 @@ import { haversineDistance, calcScore } from "@/lib/geoUtils";
 
 export type GameMode = "NFL" | "NCAA" | "ALL";
 export type GamePhase = "menu" | "playing" | "result" | "finished";
+export type DifficultyMode = "rookie" | "pro" | "all-pro";
 
 export interface LatLng {
   lat: number;
@@ -21,6 +22,7 @@ export interface RoundResult {
 
 export interface GameState {
   mode: GameMode;
+  difficulty: DifficultyMode;
   phase: GamePhase;
   round: number;       // 0-indexed
   totalRounds: number;
@@ -45,6 +47,7 @@ function getPool(mode: GameMode): Stadium[] {
 export function useGameState() {
   const [state, setState] = useState<GameState>({
     mode: "ALL",
+    difficulty: "pro",
     phase: "menu",
     round: 0,
     totalRounds: TOTAL_ROUNDS,
@@ -53,7 +56,7 @@ export function useGameState() {
     results: [],
   });
 
-  const startGame = useCallback((mode: GameMode) => {
+  const startGame = useCallback((mode: GameMode, difficulty: DifficultyMode = "pro") => {
     const pool = getPool(mode);
     const questions = pickRandom(pool, TOTAL_ROUNDS).map(q => ({
       ...q,
@@ -61,6 +64,7 @@ export function useGameState() {
     }));
     setState({
       mode,
+      difficulty,
       phase: "playing",
       round: 0,
       totalRounds: TOTAL_ROUNDS,

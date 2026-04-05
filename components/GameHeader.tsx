@@ -12,9 +12,10 @@ interface GameHeaderProps {
   round: number;
   totalRounds: number;
   totalScore: number;
+  showName?: boolean;
 }
 
-export default function GameHeader({ id, name, type, round, totalRounds, totalScore }: GameHeaderProps) {
+export default function GameHeader({ id, name, type, round, totalRounds, totalScore, showName = true }: GameHeaderProps) {
   const color = CONFERENCE_COLORS[type];
   const [imageError, setImageError] = useState(false);
   
@@ -58,7 +59,9 @@ export default function GameHeader({ id, name, type, round, totalRounds, totalSc
         >
           {type}
         </span>
-        <h2 className="text-2xl font-black text-slate-800">{name}</h2>
+        <h2 className="text-2xl font-black text-slate-800">
+          {showName ? name : "???"}
+        </h2>
       </div>
 
       {/* Optional Stadium Image */}

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { RotateCcw } from "lucide-react";
-import { RoundResult } from "@/hooks/useGameState";
+import { RoundResult, DifficultyMode } from "@/hooks/useGameState";
 import { getRank } from "@/lib/geoUtils";
 import { CountUp } from "@/components/ScoreDisplay";
 
@@ -10,10 +10,13 @@ interface ResultScreenProps {
   results: RoundResult[];
   totalScore: number;
   onRestart: () => void;
+  difficulty: DifficultyMode;
 }
 
-export default function ResultScreen({ results, totalScore, onRestart }: ResultScreenProps) {
-  const rank = getRank(totalScore);
+export default function ResultScreen({ results, totalScore, onRestart, difficulty }: ResultScreenProps) {
+  // Rookie mode: cap at Pro Bowler (Hall of Famer requires 14000+)
+  const rankScore = difficulty === "rookie" ? Math.min(totalScore, 13999) : totalScore;
+  const rank = getRank(rankScore);
 
   return (
     <motion.div
